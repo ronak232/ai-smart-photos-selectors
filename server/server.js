@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import { createServer } from "http";
 import cors from "cors";
@@ -14,5 +16,5 @@ app.use("/", routes)
 
 
 server.listen(5000, () => {
-  console.log("Server is running on port 3000");
+  console.log("Server is running on port 5000");
 });

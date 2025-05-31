@@ -1,0 +1,12 @@
+.post-pal-container {
+  background: url(https://res.cloudinary.com/dwc1sjsvj/image/upload/v1748695976/r5surxaavjplcqj9udff.png)
+    no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-pal-container main {
+  background-color: rgb(255, 255, 255);
+}
