@@ -1,5 +1,8 @@
 // components/PhotoAnalyser.jsx
+import { useEffect } from "react";
 import { useState } from "react";
+import DOMPurify from "dompurify";
+import { useNavigate } from "react-router-dom";
 
 const OCCASIONS = [
   "Birthday",
@@ -7,6 +10,8 @@ const OCCASIONS = [
   "Anniversary",
   "Graduation",
   "Festival",
+  "Artistic",
+  "Travel",
   "Other",
 ];
 const RELATIONS = [
@@ -20,18 +25,35 @@ const RELATIONS = [
   "College",
 ];
 
-const PhotoAnalyser = ({ images, onImagesChange }) => {
+const PhotoDropdown = ({ images }) => {
   const [occasion, setOccasion] = useState("");
   const [relation, setRelation] = useState("");
   const [showData, setShowData] = useState("");
+
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    const pasrseInfo = JSON.parse(user);
+    setUserInfo(pasrseInfo);
+  }, []);
+
+  useEffect(() => {
+    const handleStorage = () => {
+      const userInfo = localStorage.getItem("user");
+      setUserInfo(userInfo ? JSON.parse(userInfo) : null);
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   const handleOccasionChange = (e) => setOccasion(e.target.value);
   const handleRelationChange = (e) => setRelation(e.target.value);
 
   const handleSelectBest = async () => {
-    if (!images.length) {
-      console.error("Please select at least 2 images");
-      return;
+    if (userInfo) {
+      navigate("/login");
     }
 
     const formData = new FormData();
@@ -45,9 +67,10 @@ const PhotoAnalyser = ({ images, onImagesChange }) => {
     });
 
     const res = await response.json();
-    const formatData = new DOMParser();
-    const parsedFormatData = formatData.parseFromString(res.data, "text/html");
-    setShowData(parsedFormatData.body.textContent);
+    const parsedFormatData = res.data.replace(/^html\s*/, "");
+    // santized the data
+    const santizedData = DOMPurify.sanitize(parsedFormatData);
+    setShowData(santizedData);
   };
 
   return (
@@ -93,15 +116,17 @@ const PhotoAnalyser = ({ images, onImagesChange }) => {
         <button
           onClick={handleSelectBest}
           disabled={images.length === 0 || !occasion || !relation}
-          className="px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold shadow-md hover:bg-indigo-700 disabled:opacity-50 transition-all"
+          className="px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold shadow-md hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer"
         >
           Select Best Photo
         </button>
       </div>
 
-      <div>{showData && <div>{showData}</div>}</div>
+      <div className="mt-4 post-pal-reply">
+        {showData && <div dangerouslySetInnerHTML={{ __html: showData }} />}
+      </div>
     </>
   );
 };
 
-export default PhotoAnalyser;
+export default PhotoDropdown;

@@ -1,20 +1,20 @@
-// components/PhotoUploader.jsx
 import { useState } from "react";
-import PhotoAnalyser from "./PhotoAnalysis";
+import PhotoDropdown from "./PhotoDropdowns";
+import { X } from "lucide-react";
 
 function PhotoUploader() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleImageChange = (e) => {
-    setLoading(true)
-    const files = Array.from(e.target.files).slice(0, 4);
-    setImages(
-      files.map((file) =>
-        Object.assign(file, { preview: URL.createObjectURL(file) })
-      )
-    );
-    setLoading(false)
+    setLoading(true);
+    if (e.target.files.length > 4) {
+      alert("You can only upload upto 4 photos...");
+      return;
+    }
+    const files = e.target.files;
+    setImages((images) => [...images, ...files]);
+    setLoading(false);
   };
 
   const handleDragOver = (e) => e.preventDefault();
@@ -22,10 +22,12 @@ function PhotoUploader() {
   const handleDropOver = (e) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files);
-    const filePreviews = files.map((file) =>
-      Object.assign(file, { preview: URL.createObjectURL(file) })
-    );
-    setImages(filePreviews);
+    setImages([...images, ...files]);
+    setLoading(false);
+  };
+
+  const removePhoto = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   return (
@@ -78,28 +80,35 @@ function PhotoUploader() {
 
           {!loading ? (
             images.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-                {images.map((img, idx) => (
+              <div className="flex gap-4 mt-6">
+                {images.map((img, index) => (
                   <div
-                    key={idx}
-                    className="relative rounded-lg overflow-hidden shadow-md"
+                    key={index}
+                    className="relative rounded-lg overflow-hidden shadow-md w-30 h-30"
                   >
                     <img
-                      src={img.preview}
-                      alt={`preview-${idx}`}
+                      src={URL.createObjectURL(img)}
+                      alt={`preview-${index}`}
                       className="w-full h-full object-cover"
                     />
+                    <button
+                      className="absolute right-0 top-[-5px] rounded-full bg-blue-500 text-white cursor-pointer"
+                      onClick={() => removePhoto(index)}
+                      type="button"
+                    >
+                      <X />
+                    </button>
                   </div>
                 ))}
               </div>
             )
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 overflow-hidden">
               {Array.from({ length: images.length }).map((index) => {
                 return (
                   <img
                     key={index}
-                    className="bg-gray-200 animate-pulse rounded-lg mt-4 w-20 h-20 object-cover"
+                    className="bg-gray-200 animate-pulse rounded-lg mt-4 w-20 h-20 object-cover border-0 overflow-hidden"
                     alt=""
                     loading="lazy"
                   />
@@ -109,7 +118,7 @@ function PhotoUploader() {
           )}
         </form>
 
-        <PhotoAnalyser images={images} onImagesChange={setImages} />
+        <PhotoDropdown images={images} />
       </main>
 
       <div className="text-center text-sm text-amber-300 py-6">
