@@ -1,3 +1,22 @@
+header {
+  background: #eeeeee;
+}
+.navbar a {
+  font-family: "Leckerli One", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  color: darkseagreen;
+}
+
+.navbar .login-btn {
+  font-size: 14px;
+  overflow: hidden;
+  font-family: "Playfair Display SC", serif;
+  font-weight: 600;
+  color: #030637;
+}
+
 .post-pal-container {
   background: url(https://res.cloudinary.com/dwc1sjsvj/image/upload/v1748695976/r5surxaavjplcqj9udff.png)
     no-repeat center center fixed;
@@ -6,7 +25,20 @@
   flex-direction: column;
   align-items: center;
 }
-
 .post-pal-container main {
   background-color: rgb(255, 255, 255);
+}
+
+.post-pal-reply {
+  img {
+    max-width: 350px;
+    width: 100%;
+    max-height: 350px;
+    height: auto;
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 500;
+  }
 }
