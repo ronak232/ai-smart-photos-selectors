@@ -1,0 +1,46 @@
+name: Deploy React App  #Workflow name
+
+on:
+  push:
+    branches:
+      - main #trigger this workflow
+
+jobs:
+  build-and-deploy-react:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: pwrite
+      id-token: write
+
+    steps:
+      #checkout to repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      #setup node.js
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-versions: 20
+
+      #install dependencies
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ./client
+
+      #Build project
+      - name: Build React App
+        run: npm run build
+        working-directory: ./client
+
+        env:
+          VITE_API_URL: ${{secrets.VITE_API_URL}}
+          VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
+
+      - name: Deploy Frontend to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.Token }}
+          publish_dir: ./client/dist
