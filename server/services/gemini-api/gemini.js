@@ -35,7 +35,7 @@ export class GeminiModelInit {
         let userOptions = "";
 
         if (userPrompt && userPrompt.length > 0) {
-          userOptions += ` You are my good friend who always help best images extact the occasion and event from ${userPrompt}? and also  help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
+          userOptions += ` You are my good friend who always help best images extact the occasion and event from ${userPrompt}? and also help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
           Analyze the facial expressions, background, and mood of each image based on the analysis of the images provide by user best images or image for the occasion and relatio.
           You can deep analyse each image based on ${userPrompt}.
           - A short visual preview for each image (use <img src="..."> tags with fixed height and center of div)

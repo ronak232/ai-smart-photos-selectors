@@ -23,8 +23,6 @@ export const googleAuthHandler = async (req, res) => {
 
     let user = await User.findOne({ email });
 
-    console.log("user exist ", user)
-
     if (!user) {
       user = User.create({
         userName: name,

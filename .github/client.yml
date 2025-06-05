@@ -12,7 +12,7 @@ jobs:
 
     permissions:
       contents: write
-      pages: pwrite
+      pages: write
       id-token: write
 
     steps:

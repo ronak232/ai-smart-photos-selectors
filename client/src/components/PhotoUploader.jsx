@@ -54,7 +54,7 @@ function PhotoUploader() {
             <p className="text-sm text-gray-600">
               Drag & drop or{" "}
               <span className="text-indigo-600 font-medium">browse</span> up to
-              4 photos
+              6 photos
             </p>
             <p className="text-xs text-gray-400 mt-1">Max 10MB each</p>
             <input
