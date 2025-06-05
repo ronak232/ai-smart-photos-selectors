@@ -2,7 +2,6 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import PhotoUploader from "./components/PhotoUploader";
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
@@ -33,24 +32,22 @@ export default function App() {
 
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route path="/" element={<PhotoUploader />} />
-          <Route
-            path="/dashboard"
-            element={<PrivateRoutes children={<Dashboard />} />}
-          />
-        </Routes>
-      </Router>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route path="/" element={<PhotoUploader />} />
+        <Route
+          path="/dashboard"
+          element={<PrivateRoutes children={<Dashboard />} />}
+        />
+      </Routes>
     </>
   );
 }

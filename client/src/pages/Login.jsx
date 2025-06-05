@@ -6,13 +6,15 @@ import Dashboard from "./Dashboard";
 
 function Login() {
   const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
       navigate("/dashboard");
     }
-  }, [navigate]);
+  }, [user, navigate]);
+
   const handleGoogleLogin = async (authResponse) => {
     try {
       if (authResponse.code) {
@@ -21,7 +23,7 @@ function Login() {
         });
         localStorage.setItem("user", JSON.stringify(response.data));
         setUser(response.data);
-        navigate("/dashboard")
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Google login failed", error.message);
