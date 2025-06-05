@@ -1,11 +1,5 @@
-import {
-  GoogleGenAI,
-  createUserContent,
-  createPartFromUri,
-  HarmCategory,
-} from "@google/genai";
-import path from "node:path";
-
+import { GoogleGenAI, createUserContent, HarmCategory } from "@google/genai";
+import fetch from "node-fetch";
 export class GeminiModelInit {
   constructor(model, apikey) {
     this.model = model;
@@ -14,42 +8,52 @@ export class GeminiModelInit {
       apiKey: this.apikey,
     });
   }
-  async imageAnalyzer(imagesList, occasion, relatedTo) {
+  async imageAnalyzer(imagesList, occasion, relatedTo, userPrompt) {
     try {
       const parts = [];
-      const delayInMilliseconds = 4 * 60 * 60 * 1000; // Convert hours to milliseconds
-      for (const input of imagesList) {
-        const { path: imagePath, mimetype } = input;
-        const ext = path.extname(imagePath).toLowerCase();
 
-        if (
-          ext === ".jpg" ||
-          ext === ".jpeg" ||
-          ext === ".webp" ||
-          ext === ".png"
-        ) {
-          let uploaded = await this.gemini.files.upload({
-            file: imagePath,
-            config: { mimeType: mimetype },
-          });
+      for (let i = 0; i < imagesList.length; i++) {
+        const { url, label, mimeType } = imagesList[i];
 
-          parts.push(createPartFromUri(uploaded.uri, uploaded.mimeType));
-          console.log("Uploaded:", uploaded.uri);
-        }
+        const res = await fetch(url);
+        const arrayBuffer = await res.arrayBuffer();
+        const base64 = Buffer.from(arrayBuffer).toString("base64");
+
+        parts.push({
+          inlineData: {
+            mimeType,
+            data: base64,
+          },
+        });
+
+        parts.push({
+          text: `Label: ${label}, view here: ${url}`,
+        });
       }
-      setTimeout(() => {
-        this.gemini.files
-          .delete({ name: uploaded.name })
-          .then(() => console.log("Deleted:", uploaded.name))
-          .catch((err) => console.error("Delete failed:", err));
-      }, delayInMilliseconds);
+
+      function userOption() {
+        let userOptions = "";
+
+        if (userPrompt && userPrompt.length > 0) {
+          userOptions += ` You are my good friend who always help best images extact the occasion and event from ${userPrompt}? and also  help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
+          Analyze the facial expressions, background, and mood of each image based on the analysis of the images provide by user best images or image for the occasion and relatio.
+          You can deep analyse each image based on ${userPrompt}.
+          - A short visual preview for each image (use <img src="..."> tags with fixed height and center of div)
+       `;
+        } else {
+          userOptions += ` You are my good friend who always help best images for the ${occasion}? and also  help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
+          Analyze the facial expressions, background, and mood of each image based on the analysis of the images provide by user best images or image for the ${occasion} and relation ${relatedTo}.
+          You can assume each image has ${relatedTo} or ${occasion} property.
+          - A short visual preview for each image (use <img src="..."> tags with fixed height)
+       `;
+        }
+        return userOptions;
+      }
+      let userChoice = userOption();
 
       const contentParts = createUserContent([
         ...parts,
-        ` You are my good friend who always help best images for the ${occasion}? and also help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
-          Analyze the facial expressions, background, and mood of each image based on the analysis of the images provide me the best images or image for the ${occasion} and relation ${relatedTo}.
-          You can assume each image has ${relatedTo} or ${occasion} property.
-       `,
+        userChoice,
       ]);
 
       const response = await this.gemini.models.generateContent({
@@ -62,18 +66,26 @@ export class GeminiModelInit {
               threshold: "2",
             },
           ],
-          systemInstruction: `Please return the response in a well-formatted HTML layout like using heading paragraph bold list tag**, styled using **Tailwind CSS** and add class name for styling like best-img or alternative-img. And in end write the about best image in a bold tag and also write the alternative images in a list tag.
+          systemInstruction: `Please return the response in a well-formatted HTML layout like using heading paragraph bold list tag**, styled using **Tailwind CSS** and add custom class name for styling like best-img on each img tag. 
+          And in end write the about best image in a bold tag.
           Make it visually modern, elegant, and clean. Use a responsive card layout.
-          If user provide multiple more than 3 images then only compare the images and provide alternative images 
           Make sure to use the **Tailwind CSS** classes for styling, and ensure the layout is responsive and visually appealing.
           Remove Doctype, head, meta, title or body tags and other unnecessary tags just wrap in div tag
-          Don't add redundant infomation about about prompt and remove words like tailwind css, html, css, or any other technical jargons Example. only clean and HTML layout using Tailwind CSS to help me to choose the best image to share, focusing on visual appeal and a friendly tone.
+          Remove redundant technical jargons like tailwind, html,css
           return in html format
+          - label for each image like (Best Images or Best Image)
+          - keep in my you have to smartly provide best images not every provided images.
+          For example If user provide two images return best one of them 
+          If user provide multiple images ${
+            imagesList.length >= 3
+          } then compare the images return two best images.
           `,
         },
       });
-      console.log("response ", response.text);
-      return response.text;
+      return response.text
+        .replace(/^```html\s*```/i, "")
+        .replace(/```$/i, "")
+        .trim();
     } catch (error) {
       console.error("Error in imageAnalyzer:", error.message);
     }

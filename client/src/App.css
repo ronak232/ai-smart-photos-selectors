@@ -8,7 +8,6 @@ header {
   font-size: 2rem;
   color: darkseagreen;
 }
-
 .navbar .login-btn {
   font-size: 14px;
   overflow: hidden;
@@ -25,8 +24,31 @@ header {
   flex-direction: column;
   align-items: center;
 }
+
+.post-pal-container h1 {
+  font-family: "Leckerli One", cursive;
+}
+.post-pal-container {
+  font-family: "Playfair Display SC";
+}
+
+.post-pal-container form label p {
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.post-pal-hero-bg {
+  background: url(https://res.cloudinary.com/dwc1sjsvj/image/upload/v1749060870/dbcly6wzzd5sseohtcyu.jpg)
+    center center no-repeat;
+  background-size: cover;
+  min-height: 350px;
+  height: 100%;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 10px 0;
+}
+
 .post-pal-container main {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.79);
 }
 
 .post-pal-reply {
