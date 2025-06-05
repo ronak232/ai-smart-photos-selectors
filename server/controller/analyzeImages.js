@@ -1,4 +1,3 @@
-// import { GeminiModelInit } from "../services/gemini-api/gemini.js"; // Load from .env ideally
 import { GeminiModelInit } from "../services/gemini-api/gemini.js";
 import { uploadImage } from "../configs/cloudinary.js";
 import dotenv from "dotenv";
@@ -6,24 +5,24 @@ dotenv.config();
 
 export async function runImageAnalyzer(req, res) {
   const file = req.files;
-  const { occasion, relation } = req.body;
+  const { occasion, relation, prompt } = req.body;
 
-  //   const { userId } = req.user;
   try {
     if (!file) {
       throw new Error("No images is provided for analysis");
     }
-    // const cloudImages = await uploadImage(file);
+    const cloudImages = await uploadImage(file, occasion);
+
     const model = new GeminiModelInit(
-      "gemini-2.0-flash",
-      process.env.Gemini_Api_Key || ""
+      "gemini-2.5-flash-preview-05-20",
+      process.env.Gemini_Api_Key || "",
     );
 
     const response = await model.imageAnalyzer(
-      file,
+      cloudImages,
       occasion,
-      relation
-      // userPrompt
+      relation,
+      prompt
     );
 
     if (!response) {

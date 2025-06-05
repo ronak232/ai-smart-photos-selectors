@@ -1,5 +1,7 @@
 import Images from "../model/Images.js";
 import { v2 as cloudinary } from "cloudinary";
+import dotenv from "dotenv";
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -7,38 +9,41 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function uploadImage(data) {
-  const imagePath = data.map((path) => {
-    return path.path;
-  });
+export async function uploadImage(data, occasion) {
   const uploads = [];
   try {
     if (!data) {
       console.error("No file uploaded.");
     }
-    const result = await cloudinary.uploader.upload(imagePath, {
-      folder: "gemini-api-images",
-      resource_type: "image",
-      format: ["webp", "jpeg", "png"],
-      allowed_formats: ["webp", "heic", "jpg", "png", ""],
-    });
 
-    const imagesUrl = new Images({
-      name: "Same user",
-      imageUrl: result.secure_url,
-      userId: "21313231",
-    });
+    for (let i = 0; i < data.length; i++) {
+      const imagepath = data[i].path;
+      const result = await cloudinary.uploader.upload(imagepath, {
+        folder: "gemini-api-images",
+        resource_type: "image",
+        format: ["webp", "jpeg", "png"],
+        allowed_formats: ["webp", "heic", "jpg", "png", "webm"],
+      });
 
-    await imagesUrl.save();
+      const imagesUrl = new Images({
+        name: "Same user",
+        imageUrl: result.secure_url,
+        userId: "21313231",
+      });
 
-    uploads.push({
-      url: result.secure_url,
-      originalFilename: result.original_filename,
-      mimeType:
-        result.resource_type === "image"
-          ? "image/jpeg"
-          : "application/octet-stream",
-    });
+      await imagesUrl.save();
+
+      uploads.push({
+        url: result.secure_url,
+        originalFilename: result.original_filename,
+        mimeType:
+          result.resource_type === "image"
+            ? "image/jpeg"
+            : "application/octet-stream",
+        label: `${occasion} - Best-Image-${i + 1}`
+      });
+    }
+
     return uploads;
   } catch (error) {
     console.error("Error uploading image:", error);

@@ -26,6 +26,7 @@ function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    window.sessionStorage.clear("data");
     googleLogout();
     setUserInfo(null);
     navigate("/");

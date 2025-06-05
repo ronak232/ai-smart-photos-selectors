@@ -8,8 +8,8 @@ function PhotoUploader() {
 
   const handleImageChange = (e) => {
     setLoading(true);
-    if (e.target.files.length > 4) {
-      alert("You can only upload upto 4 photos...");
+    if (e.target.files.length >= 6) {
+      alert("You can only upload upto 6 photos...");
       return;
     }
     const files = e.target.files;
@@ -32,22 +32,12 @@ function PhotoUploader() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 text-gray-800 font-sans post-pal-container">
-      <main className="md:w-6xl w-full mx-auto p-4 mt-9 rounded-lg">
-        <div className="text-center py-10 bg flex gap-3 items-center ms-3.5">
-          <img
-            className="w-20 h-20 rounded-lg"
-            src="https://res.cloudinary.com/dwc1sjsvj/image/upload/v1748714669/apm56mgkrwifowildrfo.png"
-            alt="post-pal-logo"
-          />
-          <div>
-            <h1 className="text-4xl font-bold text-indigo-600 text-left">
-              PostPal
-            </h1>
-            <p className="text-lg text-gray-500 mt-2">
-              Your AI Photo Selector for Every Social Moment
-            </p>
-          </div>
-        </div>
+      <main className="w-full md:max-w-4xl mx-auto p-4 mt-9 rounded-lg">
+        <h1 className="text-4xl font-bold text-black text-center">PostPal</h1>
+        <p className="text-lg text-gray-500 mt-2 text-center">
+          Your AI Photo Selector for Every Social Moment
+        </p>
+        <div className="text-center py-10 mt-4 flex gap-3 items-center post-pal-hero-bg rounded-lg"></div>
 
         <form
           className="bg-white shadow-xl rounded-xl p-6 border border-gray-100"
@@ -117,7 +107,6 @@ function PhotoUploader() {
             </div>
           )}
         </form>
-
         <PhotoDropdown images={images} />
       </main>
 
