@@ -1,6 +1,7 @@
 name: Deploy React App  #Workflow name
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main #trigger this workflow
