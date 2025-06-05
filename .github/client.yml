@@ -10,11 +10,6 @@ jobs:
   build-and-deploy-react:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
     steps:
       #checkout to repository
       - name: Checkout code
@@ -24,7 +19,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
-          node-versions: 20
+          node-versions: 18
 
       #install dependencies
       - name: Install dependencies
@@ -42,7 +37,8 @@ jobs:
 
     deploy:
       name: Deploy Frontend to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: JamesIves/github-pages-deploy-action@v4.7.3
       with:
+        branch: gh-pages
         github_token: ${{ secrets.Token }}
         publish_dir: ./client/dist
