@@ -29,6 +29,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-server.listen(5000, () => {
+server.listen(process.env.SERVER_PORT || 5000, () => {
   console.log("Server is running on port 5000");
 });
