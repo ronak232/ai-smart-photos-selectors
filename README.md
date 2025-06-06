@@ -4,7 +4,7 @@
 
 ## Features
 
-- **AI-Powered Photo Selection:** Upload up to 4 photos and let the AI analyze facial expressions, background, and mood to suggest the best image for your chosen occasion and relation.
+- **AI-Powered Photo Selection:** Upload up to 6 photos and let the AI analyze facial expressions, background, and mood to suggest the best image for your chosen occasion and relation.
 - **Occasion & Relation Based Suggestions:** Pick your event (Birthday, Graduation, Festival, etc.) and your relation (Friend, Family, Partner, etc.), and get personalized photo recommendations.
 - **Modern, Responsive UI:** Simple drag-and-drop interface built with React and Tailwind CSS for a clean, mobile-friendly experience.
 - **Instant Visual Feedback:** See previews of your selected images and get results in a beautiful card layout.
