@@ -1,11 +1,7 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import PhotoUploader from "./components/PhotoUploader";
-import {
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
