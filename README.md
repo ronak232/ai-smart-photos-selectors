@@ -11,7 +11,7 @@
 
 ## How It Works
 
-1. **Upload Photos:** Drag and drop or browse up to 4 photos you want to compare.
+1. **Upload Photos:** Drag and drop or browse up to 6 photos you want to compare.
 2. **Choose Occasion & Relation:** Select the event and who the photos are for.
 3. **Get AI Recommendations:** The app uses Google Gemini AI APIs (server-side) to analyze images and return the best suggestion, formatted for easy posting on social media.
 4. **Download & Share:** Use the recommended photo for your next social media post!
