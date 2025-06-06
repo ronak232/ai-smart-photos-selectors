@@ -91,7 +91,7 @@ const PhotoDropdown = ({ images }) => {
 
   return (
     <>
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 ">
         <div>
           <label className="block text-md font-medium text-gray-700 mb-1">
             Occasion

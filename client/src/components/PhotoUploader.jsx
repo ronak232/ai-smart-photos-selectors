@@ -106,8 +106,8 @@ function PhotoUploader() {
               })}
             </div>
           )}
+          <PhotoDropdown images={images} />
         </form>
-        <PhotoDropdown images={images} />
       </main>
 
       <div className="text-center text-sm text-amber-300 py-6">
