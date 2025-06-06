@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../constant/variables";
 
 const OCCASIONS = [
   "Birthday",
@@ -68,7 +69,7 @@ const PhotoDropdown = ({ images }) => {
     formData.append("occasion", occasion);
     formData.append("relation", relation);
     formData.append("prompt", userPrompt);
-    const response = await fetch("http://localhost:5000/api/upload", {
+    const response = await fetch(`${baseURL}/api/upload`, {
       method: "POST",
       body: formData,
     });
