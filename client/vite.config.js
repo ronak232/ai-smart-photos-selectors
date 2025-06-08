@@ -11,7 +11,7 @@ export default defineConfig({
       "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
     },
     cors: {
-      origin: "http://localhost/5000",
+      origin: import.meta.env.VITE_BASEURL || "http://localhost/5000",
       credentials: true
     }
   },
