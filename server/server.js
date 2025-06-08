@@ -9,7 +9,7 @@ import { connectDB } from "./database/db.js";
 
 const app = express();
 const server = createServer(app);
-await connectDB()
+await connectDB();
 
 app.use(
   cors({

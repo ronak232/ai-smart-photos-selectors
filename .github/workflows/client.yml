@@ -16,8 +16,8 @@ jobs:
   build-and-deploy-react:
     runs-on: ubuntu-latest
     env:
-        VITE_API_URL: ${{secrets.VITE_API_URL}}
-        VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
+      VITE_API_URL: ${{secrets.VITE_API_URL}}
+      VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
     steps:
       #checkout to repository
       - name: Checkout code
@@ -39,8 +39,7 @@ jobs:
         run: npm run build
         working-directory: ./client
 
-        
-
+      # Project Deploy
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
