@@ -16,7 +16,7 @@ jobs:
   build-and-deploy-react:
     runs-on: ubuntu-latest
     env:
-      VITE_API_URL: ${{secrets.VITE_BASEURL}}
+      VITE_BASEURL: ${{secrets.VITE_BASEURL}}
       VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
     steps:
       #checkout to repository
