@@ -37,6 +37,7 @@ function Login() {
     onError: handleGoogleLogin,
     flow: "auth-code",
     access_type: "offline",
+    redirect_uri: "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector/"
   });
 
   return !user ? (
