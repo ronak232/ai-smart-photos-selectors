@@ -1,9 +1,11 @@
 import PhotoUploader from "../components/PhotoUploader";
 
 function Home() {
-  return <>
-    <PhotoUploader/>
-  </>;
+  return (
+    <>
+      <PhotoUploader />
+    </>
+  );
 }
 
 export default Home;

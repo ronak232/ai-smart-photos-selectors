@@ -6,7 +6,7 @@ dotenv.config();
 export async function runImageAnalyzer(req, res) {
   const file = req.files;
   const { occasion, relation, prompt } = req.body;
-
+  
   try {
     if (!file) {
       throw new Error("No images is provided for analysis");
@@ -15,7 +15,7 @@ export async function runImageAnalyzer(req, res) {
 
     const model = new GeminiModelInit(
       "gemini-2.5-flash-preview-05-20",
-      process.env.Gemini_Api_Key || "",
+      process.env.Gemini_Api_Key || ""
     );
 
     const response = await model.imageAnalyzer(

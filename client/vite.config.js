@@ -11,7 +11,7 @@ export default defineConfig({
       "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
     },
     cors: {
-      origin: "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector",
+      origin: "*",
       credentials: true,
     },
   },
