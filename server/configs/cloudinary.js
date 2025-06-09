@@ -17,12 +17,23 @@ export async function uploadImage(data, occasion) {
     }
 
     for (let i = 0; i < data.length; i++) {
-      const imagepath = data[i].path;
-      const result = await cloudinary.uploader.upload(imagepath, {
+      const file = data[i];
+      const base64 = file.buffer.toString("base64");
+      const dataUri = `data:${file.mimetype};base64,${base64}`;
+
+      const result = await cloudinary.uploader.upload(dataUri, {
         folder: "gemini-api-images",
         resource_type: "image",
         format: ["webp", "jpeg", "png"],
         allowed_formats: ["webp", "heic", "jpg", "png", "webm"],
+        transformation: [
+          {
+            crop: "scale",
+            fetch_format: "auto",
+            quality: "auto",
+            responsive: true,
+          },
+        ]
       });
 
       const imagesUrl = new Images({
@@ -40,13 +51,12 @@ export async function uploadImage(data, occasion) {
           result.resource_type === "image"
             ? "image/jpeg"
             : "application/octet-stream",
-        label: `${occasion} - Best-Image-${i + 1}`
+        label: `${occasion} - Best-Image-${i + 1}`,
       });
     }
 
     return uploads;
   } catch (error) {
     console.error("Error uploading image:", error);
-    // res.status(500).send("Error uploading image");
   }
 }

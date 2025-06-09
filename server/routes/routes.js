@@ -7,7 +7,7 @@ export const routes = express.Router();
 
 // routes.get("/fetch", handleGetImages());
 
-routes.post("/api/upload", uploads.array("image_personas", 4) ,runImageAnalyzer);
+routes.post("/api/upload", uploads.array("image_persona", 6) ,runImageAnalyzer);
 
 routes.post("/api/google", googleAuthHandler);
 
