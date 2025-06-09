@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Home from "";
+import Home from "./pages/Home";
 
 export default function App() {
   const getUser = localStorage.getItem("user");
