@@ -1,9 +1,9 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
-import PhotoUploader from "./components/PhotoUploader";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 
 export default function App() {
   const getUser = localStorage.getItem("user");
@@ -38,7 +38,7 @@ export default function App() {
             </PublicRoute>
           }
         />
-        <Route path="/" element={<PhotoUploader />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
           element={<PrivateRoutes children={<Dashboard />} />}

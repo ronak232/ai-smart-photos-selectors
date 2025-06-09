@@ -150,7 +150,7 @@ const PhotoDropdown = ({ images }) => {
       <div className="mt-10 text-center">
         <button
           onClick={handleSelectBest}
-          disabled={images.length === 0}
+          disabled={images?.length === 0}
           className="px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold shadow-md hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer"
         >
           Select Best Photo
