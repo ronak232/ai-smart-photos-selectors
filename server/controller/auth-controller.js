@@ -39,7 +39,6 @@ export const googleAuthHandler = async (req, res) => {
       getToken,
       user,
     });
-    // return res.redirect(`http://localhost:5173/auth?token=${responseToken}`);
   } catch (error) {
     console.error("google error ", error.message);
     res.status(500).json({

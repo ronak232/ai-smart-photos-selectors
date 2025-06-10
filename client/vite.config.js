@@ -7,11 +7,22 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "/PostPal-Intelligent-Photo-Selector/",
   server: {
-    headers: {
-      "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
-    },
+    headers: [
+      {
+        source: "/api/(.*)",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "https://post-pal-intelligent-photo-selector.vercel.app/" },
+          { key: "Access-Control-Allow-Methods", value: "GET, POST, OPTIONS" },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization",
+          },
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+        ],
+      },
+    ],
     cors: {
-      origin: "*",
+      origin: import.meta.env.VITE_BASEURL,
     },
   },
 });
