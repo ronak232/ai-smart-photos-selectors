@@ -28,7 +28,7 @@ app.use(
     credentials: true
   })
 );
-app.options("*", cors());
+// app.options("*", cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routes);
 
