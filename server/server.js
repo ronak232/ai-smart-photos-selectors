@@ -10,7 +10,7 @@ import { connectDB } from "./database/db.js";
 const app = express();
 const server = createServer(app);
 await connectDB();
-const allowedOrigins = ["http://localhost:5173", "post-pal-intelligent-photo-selector.vercel.app"];
+const allowedOrigins = ["http://localhost:5173", "https://post-pal-intelligent-photo-selector.vercel.app/"];
 app.use(
   cors({
     origin: allowedOrigins,
