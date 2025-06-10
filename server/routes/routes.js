@@ -4,8 +4,7 @@ import { uploads } from "../middleware/multer.js";
 import { googleAuthHandler } from "../controller/auth-controller.js";
 
 export const routes = express.Router();
-
-routes.options('/', cors()); 
+ 
 // routes.get("/fetch", handleGetImages());
 
 routes.post("/api/upload", uploads.array("image_persona", 6) ,runImageAnalyzer);

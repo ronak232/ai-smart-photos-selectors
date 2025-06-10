@@ -9,7 +9,8 @@ import { connectDB } from "./database/db.js";
 
 const app = express();
 const server = createServer(app);
-app.use(express.json())
+app.use(express.json());
+routes.options('/', cors());
 app.use(bodyParser.json());
 await connectDB();
 const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io/*"];
