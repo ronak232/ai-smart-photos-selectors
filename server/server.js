@@ -25,10 +25,13 @@ app.use(
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
   })
 );
+app.options("*", cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routes);
+
 
 server.listen(process.env.SERVER_PORT || 5000, () => {
   console.log("Server is running on port 5000");
