@@ -12,7 +12,6 @@ export default defineConfig({
     },
     cors: {
       origin: "*",
-      credentials: true,
     },
   },
 });
