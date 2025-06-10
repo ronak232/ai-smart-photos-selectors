@@ -10,7 +10,7 @@ import { connectDB } from "./database/db.js";
 const app = express();
 const server = createServer(app);
 await connectDB();
-const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector/"];
+const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io"];
 app.use(
   cors({
     origin: allowedOrigins,
@@ -18,7 +18,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.options("/api/google", cors());
+app.options("*", cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", routes);
