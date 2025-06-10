@@ -11,7 +11,7 @@ export default defineConfig({
       "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
     },
     cors: {
-      origin: import.meta.env.VITE_BASEURL,
+      origin: "*",
     },
   },
 });
