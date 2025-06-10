@@ -10,8 +10,6 @@ export const googleAuthHandler = async (req, res) => {
 
     const { tokens } = await oauth2Client.getToken({
       code,
-      redirect_uri:
-        "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector/",
     });
 
     oauth2Client.setCredentials(tokens);
