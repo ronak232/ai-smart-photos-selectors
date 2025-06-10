@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import { baseURL } from "../constant/variables";
-
+console.log(window.history)
 function Login() {
   const [user, setUser] = useState(null);
 

@@ -10,13 +10,12 @@ import { connectDB } from "./database/db.js";
 const app = express();
 const server = createServer(app);
 await connectDB();
-const allowedOrigins = [
-  "http://localhost:5173", 
-  "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector/",
-];
+const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io"];
 app.use(
   cors({
     origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow these HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(bodyParser.json());
