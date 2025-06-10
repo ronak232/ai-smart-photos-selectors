@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Router >
+    <Router basename="/PostPal-Intelligent-Photo-Selector">
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <App />
       </GoogleOAuthProvider>
