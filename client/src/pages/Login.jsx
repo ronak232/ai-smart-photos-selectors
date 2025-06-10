@@ -20,7 +20,7 @@ function Login() {
   const handleGoogleLogin = async (authResponse) => {
     try {
       if (authResponse.code) {
-        const response = await axios.post(`${baseURL}api/google`, {
+        const response = await axios.post(`${baseURL}/api/google`, {
           code: authResponse.code,
         });
         localStorage.setItem("user", JSON.stringify(response.data));
