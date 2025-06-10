@@ -12,7 +12,7 @@ const server = createServer(app);
 app.use(express.json())
 app.use(bodyParser.json());
 await connectDB();
-const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io"];
+const allowedOrigins = ["http://localhost:5173", "https://ronak232.github.io/*"];
 app.use(
   cors({
     origin: allowedOrigins,
