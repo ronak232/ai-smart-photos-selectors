@@ -11,7 +11,7 @@ export default defineConfig({
       "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
     },
     cors: {
-      origin: "https://post-pal-intelligent-photo-selector.vercel.app",
+      origin: "https://postpal-intelligent-photo-selector.onrender.com",
     },
   },
 });
