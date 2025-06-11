@@ -11,7 +11,7 @@ function Login() {
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
-    if (userInfo && window.location.pathname !== "/dashboard") {
+    if (userInfo) {
       navigate("/dashboard");
     }
   }, [navigate]);
