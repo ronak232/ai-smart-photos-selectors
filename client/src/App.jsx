@@ -4,13 +4,21 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function App() {
-  const getUser = localStorage.getItem("user");
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser && storedUser !== "null" ? JSON.parse(storedUser) : null;
+  });
+
+  useEffect(() => {
+    // keep in sync if needed later
+    if (!user) localStorage.removeItem("user");
+  }, [user]);
 
   const PublicRoute = ({ children }) => {
-    const user = getUser && getUser !== "null" ? JSON.parse(getUser) : null;
-
     if (user) {
       return <Navigate to="/dashboard" replace />;
     }
@@ -34,7 +42,7 @@ export default function App() {
           path="/login"
           element={
             <PublicRoute>
-              <Login />
+              <Login setUser={setUser} />
             </PublicRoute>
           }
         />

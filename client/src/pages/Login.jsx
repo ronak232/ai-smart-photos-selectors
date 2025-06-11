@@ -1,18 +1,16 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Dashboard from "./Dashboard";
 import { baseURL } from "../constant/variables";
 
-function Login() {
-  const [user, setUser] = useState(null);
+function Login({setUser}) {
   const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
-      navigate("/dashboard");
+      navigate("/dashboard"); // prevents going back to /login
     }
   }, [navigate]);
 
@@ -24,7 +22,6 @@ function Login() {
         });
         localStorage.setItem("user", JSON.stringify(response.data));
         setUser(response.data);
-        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Google login failed", error.message);
@@ -40,7 +37,7 @@ function Login() {
       "https://ronak232.github.io/PostPal-Intelligent-Photo-Selector/",
   });
 
-  return !user ? (
+  return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
       <div className="bg-white shadow-xl rounded-xl p-10 max-w-sm w-full text-center animate-fade-in">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
@@ -127,8 +124,6 @@ function Login() {
         </button>
       </div>
     </div>
-  ) : (
-    <Dashboard />
   );
 }
 
