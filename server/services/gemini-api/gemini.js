@@ -37,7 +37,7 @@ export class GeminiModelInit {
         if (userPrompt && userPrompt.length > 0) {
           userOptions += ` You are my good friend who always help best images extact the occasion and event from ${userPrompt}? and also help me choose to best photos for posting for instagram, facebook, whatapp and other social media...
           Analyze the facial expressions, background, and mood of each image based on the analysis of the images provide by user best images or image for the occasion and relatio.
-          You can deep analyse each image based on ${userPrompt}.
+          You need to analyse each images deeply based on what userprompt - ${userPrompt}.
           - A short visual preview for each image (use <img src="..."> tags with fixed height and center of div)
        `;
         } else {
@@ -66,7 +66,7 @@ export class GeminiModelInit {
               threshold: "2",
             },
           ],
-          systemInstruction: `Please return the response in a well-formatted HTML layout like using heading paragraph bold list tag**, styled using **Tailwind CSS** and add custom class name for styling like best-img on each img tag. 
+          systemInstruction: `Please return the response in a well-formatted HTML responsive grid layout like using heading paragraph bold list tag**, styled using **Tailwind CSS** and add custom class name for styling like best-img with name on each img tag. 
           And in end write the about best image in a bold tag.
           Make it visually modern, elegant, and clean. Use a responsive card layout.
           Make sure to use the **Tailwind CSS** classes for styling, and ensure the layout is responsive and visually appealing.
