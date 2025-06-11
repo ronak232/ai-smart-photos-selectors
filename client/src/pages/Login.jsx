@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../constant/variables";
 
-function Login({setUser}) {
+function Login({ setUser }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
     if (userInfo) {
-      navigate("/dashboard"); // prevents going back to /login
+      navigate("/dashboard", { replace: true }); // prevents going back to /login
     }
   }, [navigate]);
 

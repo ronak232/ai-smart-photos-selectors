@@ -14,7 +14,6 @@ export default function App() {
   });
 
   useEffect(() => {
-    // keep in sync if needed later
     if (!user) localStorage.removeItem("user");
   }, [user]);
 
@@ -36,7 +35,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar user={user}/>
       <Routes>
         <Route
           path="/login"

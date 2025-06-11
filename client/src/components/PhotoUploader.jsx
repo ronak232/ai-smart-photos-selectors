@@ -22,7 +22,6 @@ function PhotoUploader() {
   };
 
   const handleImageChange = (e) => {
-    console.log(e.target.files);
     setLoading(true);
 
     if (e.target.files.length >= 6) {

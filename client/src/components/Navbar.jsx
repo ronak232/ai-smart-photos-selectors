@@ -1,18 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { CircleUser } from "lucide-react";
 
-function Navbar() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const handleStorage = () => {
-      const userInfo = localStorage.getItem("user");
-      setUser(userInfo ? JSON.parse(userInfo) : null);
-    };
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, [user]);
+function Navbar({user}) {
 
   return (
     <header>
