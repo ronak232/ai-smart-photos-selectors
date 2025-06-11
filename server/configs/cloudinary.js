@@ -21,8 +21,9 @@ export async function uploadImage(data, occasion) {
       const file = data[i];
 
       const compressedBuffer = await sharp(file.buffer)
-      .webp({ quality: 60 }) // Adjust quality as needed
-      .toBuffer();
+        .resize({ width: 1024 })
+        .jpeg({ quality: 60 })
+        .toBuffer();
 
       const base64 = compressedBuffer.toString("base64");
       const dataUri = `data:${file.mimetype};base64,${base64}`;
@@ -36,7 +37,7 @@ export async function uploadImage(data, occasion) {
           {
             crop: "scale",
             fetch_format: "auto",
-            quality: "60",
+            quality: "auto",
             responsive: true,
           },
         ],
