@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <header>
       <nav className="container flex items-center justify-between shadow-md p-2 mx-auto navbar">
-        <a href="/">PostPal</a>
+        <Link to="/PostPal-Intelligent-Photo-Selector/">PostPal</Link>
         <Link
           to={user ? "/dashboard" : "/login"}
           className="border-[1px] bg-gray-300 rounded-full login-btn h-10 w-10"

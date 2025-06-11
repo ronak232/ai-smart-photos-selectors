@@ -1,5 +1,6 @@
 import Images from "../model/Images.js";
 import { v2 as cloudinary } from "cloudinary";
+import sharp from "sharp";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -18,7 +19,12 @@ export async function uploadImage(data, occasion) {
 
     for (let i = 0; i < data.length; i++) {
       const file = data[i];
-      const base64 = file.buffer.toString("base64");
+
+      const compressedBuffer = await sharp(file.buffer)
+      .webp({ quality: 60 }) // Adjust quality as needed
+      .toBuffer();
+
+      const base64 = compressedBuffer.toString("base64");
       const dataUri = `data:${file.mimetype};base64,${base64}`;
 
       const result = await cloudinary.uploader.upload(dataUri, {
@@ -30,10 +36,10 @@ export async function uploadImage(data, occasion) {
           {
             crop: "scale",
             fetch_format: "auto",
-            quality: "auto",
+            quality: "60",
             responsive: true,
           },
-        ]
+        ],
       });
 
       const imagesUrl = new Images({

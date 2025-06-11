@@ -7,15 +7,14 @@ import { baseURL } from "../constant/variables";
 
 function Login() {
   const [user, setUser] = useState(null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = localStorage.getItem("user");
-    if (userInfo) {
+    if (userInfo && window.location.pathname !== "/dashboard") {
       navigate("/dashboard");
     }
-  }, [user, navigate]);
+  }, [navigate]);
 
   const handleGoogleLogin = async (authResponse) => {
     try {
