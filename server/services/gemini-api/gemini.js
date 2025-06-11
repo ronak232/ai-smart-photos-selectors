@@ -73,12 +73,14 @@ export class GeminiModelInit {
           Remove Doctype, head, meta, title or body tags and other unnecessary tags just wrap in div tag
           Remove redundant technical jargons like tailwind, html,css
           return in html format
+          Rules for the response
           - label for each image like (Best Images or Best Image)
-          - keep in my you have to smartly provide best images not every provided images.
-          For example If user provide two images return best one of them 
-          If user provide multiple images ${
+          - keep in mind you have to smartly provide best images not every provided images.
+          For example - If user provide two images return only best one of them 
+          Similarly If user provide multiple images ${
             imagesList.length >= 3
-          } then compare the images return two best images.
+          } then compare the images return two best images. and so on.
+          - Do not show preview of the uploaded images...
           `,
         },
       });
