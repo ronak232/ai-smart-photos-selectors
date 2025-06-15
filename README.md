@@ -1,6 +1,7 @@
 # PostPal: AI Smart Photo Selector
 
 **PostPal** is an AI-powered web application that helps you select the best photos for your social moments. Whether it's for Instagram, Facebook, WhatsApp, or any special occasion, PostPal analyzes your images and recommends the most share-worthy ones using advanced AI models.
+![Screenshot 2025-06-11 131835](https://github.com/user-attachments/assets/d9c6a804-8210-41a3-ac3b-d77a820e5baf)
 
 ## Features
 
